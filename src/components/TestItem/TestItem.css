@@ -1,0 +1,30 @@
+.test-item {
+    display: inline-flex;
+    height: inherit;
+    flex-direction: column;
+    cursor: pointer;
+    height: inherit;
+}
+
+.test-item:not(:first-child) {
+    margin-left: 10px;
+}
+
+.test-list {
+    height: 300px;
+}
+
+.test-item__image {
+    height: calc(300px - 3rem);
+    width: auto;    
+}
+
+.test-item-content {
+    display: flex;
+    flex-direction: column;
+    height: inherit;
+}
+
+.test-item-content h3, p {
+    height: 1.5rem;
+}

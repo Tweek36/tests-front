@@ -1,0 +1,34 @@
+.scroll-content {
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+    scroll-behavior: smooth;
+    height: inherit;
+}
+
+.scrollable-container {
+    position: relative;
+}
+
+.scroll-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 30px;
+    height: 30px;
+    background-color: #ccc;
+    border: none;
+    cursor: pointer;
+}
+
+.scroll-button.left {
+    left: 0;
+}
+
+.scroll-button.right {
+    right: 0;
+}
+
+.scroll-content::-webkit-scrollbar {
+    display: none;
+}

@@ -1,0 +1,110 @@
+.create-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    max-width: 1200px;
+    padding: 20px 40px;
+}
+
+.main-information {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.main-information-left {
+    width: 66%;
+    padding: 0 15px;
+}
+
+.main-information-right {
+    width: 34%;
+    padding: 0 15px;
+}
+
+.main-information-right>* {
+    position: sticky;
+    top: 100px;
+}
+
+.save {
+    position: fixed;
+    margin-top: 8px;
+    right: 8px;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+}
+
+.save>label {
+    text-align: right;
+}
+
+.save-button {
+    height: 24px;
+    width: 24px;
+}
+
+.save-button>svg {
+    fill: #88bb33;
+    height: 24px;
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.save-button.saving {
+    animation: rotate 1s linear infinite;
+}
+
+.save-button.saving:hover {
+    cursor: default;
+}
+
+.add-from-playlist__wrapper {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+}
+
+.add-from-playlist__wrapper>:not(:first-child) {
+    margin-left: 20px;
+}
+
+.add-from-playlist__wrapper>.input-conteiner {
+    flex: 1;
+}
+
+.add-from-playlist__wrapper>iframe {
+    width: 480px;
+    height: 270px;
+}
+
+.add-from-playlist__wrapper>button {
+    background-color: #88bb33;
+    color: black;
+    padding: 8px;
+    border-radius: 8px;
+}
+
+.publish-button {
+    background-color: #88bb33;
+    color: black;
+    padding: 8px;
+    border-radius: 8px;
+}
+
+.publish {
+    position: fixed;
+    margin-top: 8px;
+    right: 8px;
+    bottom: 8px;
+    z-index: 100;
+}

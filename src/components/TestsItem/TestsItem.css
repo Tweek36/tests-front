@@ -1,0 +1,64 @@
+.tests-item {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+    background-color: #263238;
+    border-radius: 8px;
+    padding: 8px;
+}
+
+.tests-item-content {
+    display: flex;
+    flex-direction: row;
+}
+
+.tests-item-content :not(:first-child) {
+    margin-left: 10px;
+}
+
+.tests-item-content img {
+    max-width: 13%;
+}
+
+.tests-item-content p {
+    flex: 1;
+    align-self: center;
+}
+
+.tests-item-content h3 {
+    width: 70px;
+    min-width: 70px;
+    align-self: center;
+    text-align: center;
+}
+
+.open-additional-info {
+    width: 24px;
+}
+
+.tests-item-additional-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.win-image, .loss-image {
+    width: 13%;
+}
+
+.win, .loss {
+    display: flex;
+    flex-direction: row;
+    padding: 5px;
+}
+
+.win :not(:first-child), .loss :not(:first-child) {
+    margin-left: 5px;
+}
+
+.tests-item hr {
+    margin: 1rem 0;
+}
+
+.tests-item img {
+    cursor: pointer;
+}

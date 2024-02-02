@@ -1,0 +1,40 @@
+.input-with-icon {
+    display: flex;
+    position: relative;
+    width: 100%;
+}
+
+.input-with-icon>input {
+    width: 100%;
+    margin-left: 1.6em;
+    background-color: rgba(255, 255, 255, 25%);
+    border-bottom: 1px #88bb33 solid;
+    transition: border-color 0.5s;
+}
+
+.input-with-icon>input:focus-visible {
+    border-color: #33bba4;
+    transition: border-color 0.5s;
+}
+
+.input-with-icon>input:not(:focus-visible) {
+    border-color: #88bb33;
+    transition: border-color 0.5s;
+}
+
+.input-with-icon>input:focus-visible + svg>* {
+    transition: 0.5s;
+    fill: #33bba4;
+}
+
+.input-with-icon>input:not(:focus-visible) + svg>* {
+    transition: 0.5s;
+    fill: #88bb33;
+}
+
+.input-with-icon>svg {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 100%;
+}

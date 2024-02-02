@@ -1,0 +1,30 @@
+.start-test .content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    max-width: 1200px;
+    padding: 20px 40px;
+    align-items: center;
+}
+
+.test-card {
+    max-width: 600px;
+    width: 100%;
+    text-align: center;
+}
+
+.test-card>:not(:first-child) {
+    margin-top: 10px;
+}
+
+.test-card-image,
+.test-card-image>img {
+    width: inherit;
+}
+
+.test-card-buttons>button {
+    background-color: #88bb33;
+    color: black;
+    padding: 8px;
+    border-radius: 8px;
+}

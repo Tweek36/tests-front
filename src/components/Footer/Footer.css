@@ -1,0 +1,28 @@
+footer {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    background-color: #263238;
+    height: -webkit-fill-available;
+}
+
+.footer-conteiner {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    max-width: 1200px;
+    padding: 0 40px;
+}
+
+.footer-left-side {
+    flex: 1;
+}
+
+.footer-right-side {
+    flex: 2;
+}
+
+hr {
+    border-top: 1px solid rgba(0, 0, 0, .1);
+    margin: 1rem 0 2rem;
+}

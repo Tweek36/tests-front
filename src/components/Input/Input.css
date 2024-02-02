@@ -1,0 +1,35 @@
+.input-conteiner {
+    position: relative;
+    margin-bottom: 30px;
+}
+
+.input-conteiner__maxlength {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.input-conteiner__wrapper {
+    margin-top: 8px;
+}
+
+.input__input[type="text"] {
+    width: 100%;
+    padding: 0 20px;
+    border-radius: 8px;
+    height: 50px;
+    background-color: #263238;
+}
+
+.input__textarea {
+    resize: none;
+    width: 100%;
+    padding: 15px 20px;
+    background-color: #263238;
+    border-radius: 8px;
+    height: 130px;
+}
+
+.inversed {
+    background-color: #3a454b !important;
+}

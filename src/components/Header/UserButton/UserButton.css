@@ -1,0 +1,20 @@
+.user-button>svg {
+    width: 24px;
+    height: 24px;
+}
+
+.user-button {
+    outline: none;
+    padding: 0 2px;
+    cursor: pointer;
+}
+
+.user-button:focus-visible>svg, .user-button:hover>svg>* {
+    fill: #33bba4;
+    transition: 0.5s;
+}
+
+.user-button:not(:focus-visible):not(:hover)>svg>* {
+    fill: #88bb33;
+    transition: fill 0.5s;
+}
