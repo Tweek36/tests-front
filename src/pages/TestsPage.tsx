@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { getTestsById, makeChoice, makeReChoice, makeRefresh } from '../api';
+import { getItems, getTestsById, makeChoice, makeReChoice, makeRefresh } from '../api';
 import './TestsPage.css'
 import Header from '../components/Header/Header';
 import Footer from '../components/Footer/Footer';
 import TestsItem from '../components/TestsItem/TestsItem';
 import { ReactComponent as BackIcon } from '../local/svg/back.svg'
 import { ReactComponent as RefreshIcon } from '../local/svg/refresh.svg'
+import { ReactComponent as ListIcon } from '../local/svg/list.svg'
 import Video from '../components/Dialogs/Video/Video';
+import TestsItemsList from '../components/Dialogs/TestsItemsList/TestsItemsList';
 
 
 interface TestsPageProps {
@@ -29,9 +31,11 @@ const TestsPage: React.FC<TestsPageProps> = ({ username, isLoginOpen, setUsernam
     const [is_refreshed, setRefreshed] = useState(false)
     const [video_open, isVideoOpen] = useState(false)
     const [cur_videoId, setCurVideoId] = useState('')
+    const [items_list, setItemsList] = useState<{ videoId: string, title: string }[]>([])
+    const [is_items_list_open, setItemsListOpen] = useState(false)
     // const navigate = useNavigate();
 
-    useEffect(()=>{
+    useEffect(() => {
         if (!video_open) {
             setCurVideoId('')
         }
@@ -102,10 +106,18 @@ const TestsPage: React.FC<TestsPageProps> = ({ username, isLoginOpen, setUsernam
         setRefreshed(true)
     }
 
+    const onClickTestsItems = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+        e.preventDefault();
+        setItemsListOpen(true);
+        const response = await getItems(Number(tests_id))
+        setItemsList(response.data)
+    }
+
     return (
         <div className="tests page">
             {isInfoLoaded && isEnded && (<Header username={username} isLoginOpen={isLoginOpen} setUsername={setUsername} />)}
-            {isInfoLoaded && isEnded && (<Video open={video_open} isOpen={isVideoOpen} videoId={cur_videoId} />)}
+            <Video open={video_open} isOpen={isVideoOpen} videoId={cur_videoId} />
+            <TestsItemsList hidden={video_open} open={is_items_list_open} isOpen={setItemsListOpen} items={items_list} setVideoId={setCurVideoId} isVideoOpen={isVideoOpen} />
             {isInfoLoaded ? (isEnded ? (
                 <div className="ended-content">
                     <div className="tests-list">
@@ -122,40 +134,46 @@ const TestsPage: React.FC<TestsPageProps> = ({ username, isLoginOpen, setUsernam
                             <p>Раунд: {round} / {all_rounds}</p>
                         </div>
                         <div className="tests-info-right">
-                            {<button className="rechoice" onClick={(e) => { e.preventDefault(); setRechoice(!rechoice); rechoice ? setRound(round + 1) : setRound(round - 1) }} disabled={prev_items === null}><BackIcon className={rechoice ? 'reflected' : undefined} />Вернуться</button>}
-                            <button className="refresh" disabled={is_refreshed} onClick={refresh}><RefreshIcon />Перемешать</button>
+                            <button className="tests-items" onClick={onClickTestsItems}><ListIcon />Список</button>
+                            <button className="rechoice" onClick={(e) => { e.preventDefault(); setRechoice(!rechoice); rechoice ? setRound(round + 1) : setRound(round - 1) }} disabled={prev_items === null}><BackIcon className={rechoice ? 'reflected' : undefined} />Вернуться</button>
+                            <button className="refresh" onClick={refresh}><RefreshIcon />Перемешать</button>
                         </div>
                     </div>
-                    <div className={"choices" + (rechoice ? " hidden" : "")}>
-                        {items && items.map((item) => {
-                            return (
-                                <div className="choice">
-                                    <div className="choice-title">
-                                        <a href={"https://www.youtube.com/watch?v=" + item.videoId} className="choice-title__link">{item.title}</a>
+                    {!rechoice ?
+                        (<div className={"choices" + (rechoice ? " hidden" : "")}>
+                            {items && items.map((item) => {
+                                return (
+                                    <div className="choice">
+                                        <div className="choice-title">
+                                            <a href={"https://www.youtube.com/watch?v=" + item.videoId} className="choice-title__link">{item.title}</a>
+                                        </div>
+                                        <div className="choice-video">
+                                            <iframe className="choice-video__iframe" src={"https://www.youtube.com/embed/" + item.videoId} allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
+                                        </div>
+                                        <button className="set-winner" onClick={(e) => { setWinner(e, item.id) }}>Выбрать</button>
                                     </div>
-                                    <div className="choice-video">
-                                        <iframe className="choice-video__iframe" src={"https://www.youtube.com/embed/" + item.videoId} allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
-                                    </div>
-                                    <button className="set-winner" onClick={(e) => { setWinner(e, item.id) }}>Выбрать</button>
-                                </div>
-                            )
-                        })}
-                    </div>
-                    <div className={"choices" + (rechoice ? "" : " hidden")}>
-                        {prev_items && prev_items.map((item) => {
-                            return (
-                                <div className="choice">
-                                    <div className="choice-title">
-                                        <a href={"https://www.youtube.com/watch?v=" + item.videoId} className="choice-title__link">{item.title}</a>
-                                    </div>
-                                    <div className="choice-video">
-                                        <iframe className="choice-video__iframe" src={"https://www.youtube.com/embed/" + item.videoId} allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
-                                    </div>
-                                    <button className="set-winner" onClick={(e) => { setReWinner(e, item.id) }}>Выбрать</button>
-                                </div>
-                            )
-                        })}
-                    </div>
+                                )
+                            })}
+                        </div>
+                        ) : (
+                            <div className={"choices" + (rechoice ? "" : " hidden")}>
+                                {prev_items && prev_items.map((item) => {
+                                    return (
+                                        <div className="choice">
+                                            <div className="choice-title">
+                                                <a href={"https://www.youtube.com/watch?v=" + item.videoId} className="choice-title__link">{item.title}</a>
+                                            </div>
+                                            <div className="choice-video">
+                                                <iframe className="choice-video__iframe" src={"https://www.youtube.com/embed/" + item.videoId} allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
+                                            </div>
+                                            <button className="set-winner" onClick={(e) => { setReWinner(e, item.id) }}>Выбрать</button>
+                                        </div>
+                                    )
+                                })}
+                            </div>
+                        )
+                    }
+
                 </div>)
             ) : (
                 <div className="loading">Loading</div>

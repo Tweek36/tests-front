@@ -38,10 +38,10 @@
     fill: #33bba4;
 }
 
-.tests-info .refresh svg {
+.tests-info .refresh svg, .tests-info .tests-items svg {
     stroke: #88bb33 !important;
 }
-.tests-info .refresh:hover:not(:disabled) svg {
+.tests-info .refresh:hover:not(:disabled) svg, .tests-info .tests-items:hover:not(:disabled) svg {
     stroke: #33bba4 !important;
 }
 

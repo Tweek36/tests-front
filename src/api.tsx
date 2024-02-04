@@ -209,3 +209,10 @@ export const getUnfinishedList = async () => {
     })
     return response
 }
+
+export const getItems = async (tests_id: number) => {
+    const response = await API.get(`/tests/${tests_id}/items/`, {
+        withCredentials: true
+    })
+    return response
+}

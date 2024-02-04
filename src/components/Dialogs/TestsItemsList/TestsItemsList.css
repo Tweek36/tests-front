@@ -1,0 +1,38 @@
+.tests-items-list[open] {
+    z-index: 999;
+}
+
+.tests-items-list-content {
+    padding: 20px 10px;
+    height: 90vh;
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 50px;
+    display: flex;
+    flex-direction: column;
+    background-color: #3a454b;
+    overflow-y: scroll;
+}
+
+.tests-items-list-item {
+    padding: 8px;
+    border-radius: 8px;
+    background-color: #263238;
+    display: flex;
+}
+
+.tests-items-list-item>*{
+    align-self: center;
+}
+
+.tests-items-list-item :not(:last-child) {
+    margin-right: 10px;
+}
+
+.tests-items-list-content>:not(:last-child) {
+    margin-bottom: 10px;
+}
+
+.tests-items-list-item__video {
+    width: 13%;
+}
